@@ -6,9 +6,17 @@ import listImage2 from "/public/food2.png";
 import { useState } from "react";
 
 export default function List() {
-  let 상품 = ["Tomatoes", "Pasta", "Coconut"];
+  let [상품, set상품] = useState([
+    { product: "Tomatoes", cnt: 0 },
+    { product: "Pasta", cnt: 0 },
+    { product: "Coconut", cnt: 0 },
+  ]);
   let images = [listImage, listImage1, listImage2];
-  let [cnt, setCnt] = useState(0);
+
+  const productCnt = (el) => {
+    console.log(el);
+  };
+
   return (
     <div>
       <h4 className="title">상품목록</h4>
@@ -17,15 +25,9 @@ export default function List() {
           <div className="food" key={idx}>
             {/* <img src="/food0.png" alt="" className="food-img" /> */}
             <Image src={images[idx]} className="food-img" />
-            <h4>{el} $30</h4>
-            <span> {cnt} </span>
-            <button
-              onClick={() => {
-                setCnt(cnt + 1);
-              }}
-            >
-              +
-            </button>
+            <h4>{el.product} $30</h4>
+            <span> {el.cnt} </span>
+            <button onClick={() => productCnt(el)}>+</button>
           </div>
         );
       })}
