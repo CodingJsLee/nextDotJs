@@ -7,14 +7,17 @@ import { useState } from "react";
 
 export default function List() {
   let [상품, set상품] = useState([
-    { product: "Tomatoes", cnt: 0 },
-    { product: "Pasta", cnt: 0 },
-    { product: "Coconut", cnt: 0 },
+    { id: 0, product: "Tomatoes", cnt: 0 },
+    { id: 1, product: "Pasta", cnt: 0 },
+    { id: 2, product: "Coconut", cnt: 0 },
   ]);
   let images = [listImage, listImage1, listImage2];
 
-  const productCnt = (el) => {
-    console.log(el);
+  const productCnt = (idx) => {
+    const newProduct = [...상품];
+    newProduct[idx].cnt += 1;
+    set상품(newProduct);
+    console.log(상품);
   };
 
   return (
@@ -27,7 +30,7 @@ export default function List() {
             <Image src={images[idx]} className="food-img" />
             <h4>{el.product} $30</h4>
             <span> {el.cnt} </span>
-            <button onClick={() => productCnt(el)}>+</button>
+            <button onClick={() => productCnt(idx)}>+</button>
           </div>
         );
       })}
